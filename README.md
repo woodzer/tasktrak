@@ -42,3 +42,15 @@ created...
 
 That should run up a server for the content that will be available on
 your local machine at http://localhost:5000.
+
+## To Do
+
+This is currently a work in progress application and should be treated
+as such. That said, the following is a list of functionality (in no
+particular order) that I think I would like to address...
+
+ * Get HTTPS working on the actual deployment.
+
+ * Get a proper site icon.
+
+ * Add proper unit tests for the code.
