@@ -223,7 +223,9 @@ function createTaskInstanceStore() {
                       */
                      touchStickyTasks: function() {
                          console.log("Touching sticky incomplete tasks for current date.");
-                         this.touchMatching(e => e.sticky, false);
+                         this.touchMatching(e => {
+                             return(e.sticky && e.status !== "complete");
+                         }, false);
                      },
                      /**
                       * This function provides a generic update for a specific
