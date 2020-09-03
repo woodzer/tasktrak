@@ -28,3 +28,17 @@ application has the following features...
 I made add other facilities and functionality over time. I've put the
 application online for use at http://tasktrak.online - HTTPS will be
 added as soon as I get around to it.
+
+## Running The Application Locally
+
+If you want to run the application locally then clone the repository
+and run the following commands from within the application folder
+created...
+
+```
+    $> npm install
+    $> npm run dev
+```
+
+That should run up a server for the content that will be available on
+your local machine at http://localhost:5000.
