@@ -97,7 +97,7 @@
 
             <div class="field">
                 <label class="checkbox" for="task_sticky">
-                    <input type="checkbox" name="task_sticky" bind:value={task.sticky}>
+                    <input type="checkbox" name="task_sticky" bind:checked={task.sticky}>
                     Sticky
                 </label>
             </div>
