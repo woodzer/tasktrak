@@ -2,7 +2,7 @@
     import 'bulma/css/bulma.css';
     import moment from 'moment';
     import {records} from './records.js';
-    import {filterTasks, taskSorter} from './tasks.js';
+    import {filterTasksByActiveDates, taskSorter} from './tasks.js';
     import {revertView} from './views.js';
     import {get} from 'svelte/store';
 

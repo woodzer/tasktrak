@@ -35,31 +35,50 @@ export function deleteTasks(taskIds) {
 }
 
 /**
+ * This function filters a list of tasks by applying a predicate to each of them
+ * in turn. The predicate should take a single task parameter and return either
+ * true or false to indicate whether they have 'passed' the filter.
+ */
+export function filterTasks(tasks, predicate) {
+    return(tasks.filter(predicate));
+}
+
+/**
  * This function filters a task list for tasks that have active dates that
  * match a specific date.
  */
-export function filterTasks(tasks, dates) {
-    console.log("Calling filter tasks.");
+export function filterTasksByActiveDates(tasks, dates) {
+    let timestamps = [];
 
     if(Array.isArray(dates)) {
-        let timestamps = dates.map(e => e.startOf("day").unix()).sort();
-        return(tasks.filter(entry => {
-            return(entry.datesActive.filter(e => timestamps.includes(e)).length > 0);
-        }));
+        timestamps = dates.map(e => e.startOf("day").unix()).sort();
     } else {
-        let timestamp = dates.startOf("day").unix();
-        return(tasks.filter(entry =>  entry.datesActive.indexOf(timestamp) !== -1));
+        timestamps.push(dates.startOf("day").unix());
     }
+
+    return(filterTasks(tasks, t => {
+        return(t.datesActive.filter(e => timestamps.includes(e)).length > 0);
+    }));
 }
 
 /**
  * This function marks all tasks with a specified task id as incomplete.
  */
 export function incompleteTasks(taskIds) {
-    console.log("Complete tasks requested for the following task ids -", taskIds.join(", "));
+    console.log("Incomplete tasks requested for the following task ids -", taskIds.join(", "));
     records.incompleteAllOf(taskIds);
 }
 
+/**
+ * This function searches a list of tasks, matching each with a predicate
+ * function that will return true or false for a task. The function returns
+ * true if any of the tasks return true from the predicate, false if none
+ * of them do.
+ */
+export function taskExists(tasks, predicate) {
+    return(tasks.some(predicate));
+}
+ 
 /**
  * This function can be used with the Array.sort function to sort tasks, placing
  * incomplete tasks above completed ones and otherwise sorting by the task title.
@@ -77,6 +96,26 @@ export function taskSorter(task1, task2) {
         return(-1);
     } else {
         return(1);
+    }
+}
+
+/**
+ * This function tests whether a set of tasks has at least one member that was
+ * active on a set of one or more specified dates.
+ */
+export function anyTaskActiveOn(tasks, dates) {
+    let timestamps = [];
+
+    if(Array.isArray(dates)) {
+        timestamps = dates.map(e => e.startOf("day").unix()).sort();
+    } else {
+        timestamps.push(dates.startOf("day").unix());
+    }
+
+    if(timestamps.length > 0) {
+        return(tasks.some(t => t.datesActive.some(e => timestamps.includes(e))));
+    } else {
+        return(false);
     }
 }
 

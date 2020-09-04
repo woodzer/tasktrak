@@ -2,7 +2,7 @@
     import 'bulma/css/bulma.css';
     import moment from 'moment';
     import {records} from './records.js';
-    import {filterTasks, taskSorter} from './tasks.js';
+    import {filterTasksByActiveDates, taskSorter} from './tasks.js';
     import {revertView} from './views.js';
 
     // Stores.
@@ -79,7 +79,7 @@
                     </tr>
                 </thead>
                 <tbody>
-                {#each filterTasks($records.tasks, dates).sort(taskSorter) as task}
+                {#each filterTasksByActiveDates($records.tasks, dates).sort(taskSorter) as task}
                     <tr>
                         <td>{task.title}</td>
                         <td>

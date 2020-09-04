@@ -5,7 +5,7 @@
     import {selectedTask, state} from './state.js';
     import {createEventDispatcher, tick} from 'svelte';
     import {get} from 'svelte/store';
-    import {filterTasks, taskSorter} from './tasks.js';
+    import {anyTaskActiveOn, filterTasksByActiveDates, taskSorter} from './tasks.js';
     import {selectView} from './views.js';
 
     // Properties.
@@ -137,7 +137,7 @@
                 console.log(taskId, "removed to the list of selected id which now has", selectedIds.length, "entries.");
             }
         }
-        allSelected = (filterTasks($records.tasks, date).length === selectedIds.length);
+        allSelected = (filterTasksByActiveDates($records.tasks, date).length === selectedIds.length);
         notifySelectionChange(selectedIds);
     }
 
@@ -157,6 +157,7 @@
 
 <section>
     <div class="container">
+        {#if anyTaskActiveOn($records.tasks, date)}
         <table class="table is-fullwidth is-hoverable">
             <thead>
                 <tr>
@@ -170,7 +171,7 @@
                 </tr>
             </thead>
             <tbody class="is-size-5">
-                {#each filterTasks($records.tasks, date).sort(taskSorter) as task}
+                {#each filterTasksByActiveDates($records.tasks, date).sort(taskSorter) as task}
                 <tr class="unhovered" on:mouseover={onMouseEnter} on:mouseleave={onMouseLeave}>
                     <td class="select-column">
                         <label class="checkbox" title="Select Task">
@@ -197,6 +198,11 @@
                 {/each}
             </tbody>
         </table>
+        {:else}
+        <div>
+            <center class="has-grey-text">No tasks found for {date.format("YYYY-MM-DD")}.</center>
+        </div>
+        {/if}
     </div>
 </section>
 
