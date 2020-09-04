@@ -23,6 +23,14 @@ if [ "$?" -ne "0" ]; then
   exit -1
 fi
 
+# Build for deployment.
+echo "Building for deployment (please ensure the development server is not running)."
+npm run build >> $DEPLOY_LOG_FILE 2>&1
+if [ "$?" -ne "0" ]; then
+  echo "Build for deployment failed."
+  exit -1
+fi
+
 # Create the deployment archive.
 ARCHIVE_NAME="$DEPLOYMENT_ARCHIVE_PREFIX$TIMESTAMP.tgz"
 ARCHIVE_PATH="$WORKING_DIRECTORY/$ARCHIVE_NAME"
