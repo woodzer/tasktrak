@@ -3,6 +3,7 @@ import moment from 'moment';
 import {createTaskInstance, records} from './records.js';
 import {state} from './state.js';
 import {revertView} from './views.js';
+import {tick} from 'svelte';
 
 /**
  * This value is used to store the name of the view that preceded the
@@ -17,6 +18,9 @@ let previousView = null;
 export function createTask(task, revert) {
     console.log("Received a task create request, processing.");
     records.add(task);
+    if(revert) {
+        tick().then(() => revertView());
+    }
 }
 
 /**
@@ -138,7 +142,7 @@ export function updateTask(task, revert) {
     if(task.id) {
         records.update(task);
         if(revert) {
-            revertView();
+            tick().then(() => revertView());
         }
     } else {
         console.error("The task passed for a task update request did not possess an id.");
