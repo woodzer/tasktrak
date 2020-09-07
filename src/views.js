@@ -14,7 +14,7 @@ export const activeView = writable("day");
 /**
  * A list of the valid task names.
  */
-const VALID_VIEW_NAMES = ["day", "editTask", "reviewTaskView", "standUpView", "weekView"];
+const VALID_VIEW_NAMES = ["cleanUpView", "day", "editTask", "reviewTaskView", "standUpView", "weekView"];
 
 /**
  * This function provides a mechanism that can be used to determine whether the
