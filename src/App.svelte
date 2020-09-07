@@ -8,6 +8,7 @@
 	import {onMount} from 'svelte';
 	import {activeView} from './views.js';
 	import {tick} from 'svelte';
+	import CleanUpView from './CleanUpView.svelte';
 	import DayView from './DayView.svelte';
 	import EditTaskView from './EditTaskView.svelte';
 	import StandUpView from './StandUpView.svelte';
@@ -85,7 +86,9 @@
 			</div>
 		</nav>
 
-	{#if $activeView === "day"}
+	{#if $activeView === "cleanUpView"}
+	    <CleanUpView tasks={$records.tasks}/>
+	{:else if $activeView === "day"}
 		<DayView date={$state.selectedDate} on:action={handleAction} />
 	{:else if $activeView === "editTask"}
 		<EditTaskView on:action={handleAction} task={$selectedTask} />
