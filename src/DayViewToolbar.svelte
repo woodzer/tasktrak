@@ -207,38 +207,52 @@
                             </button>
                         </div>
                     </div>
+
+                    <div class="navbar-item">
+                        <div class="control">
+                            <button on:click={() => switchView("cleanUpView")} view-name="cleanUpView" class="button" title="Clean Up">
+                                <span class="icon"><i class="far fa-hand-sparkles"></i></span>
+                            </button>
+                        </div>
+                    </div>
                 </div>
 
                 <div class="navbar-end">
-                    <div class="navbar-item">
+                    <!-- <div class="navbar-item">
                         <span class="has-text-weight-bold is-size-4">{$state.selectedDate.format("dddd, Do MMMM, YYYY")}</span>
-                    </div>
+                    </div> -->
 
                     <div class="navbar-item">
-                        <div class="are-small buttons">
-                            <button class="button is-dark" title="Previous Week" on:click={stepBack1Week}>
-                                <span class="icon">
-                                    <i class="fas fa-angle-double-left"></i>
-                                </span>
-                            </button>
+                        <div class="control">
+                            <div class="buttons">
+                                <button class="button is-dark" title="Previous Week" on:click={stepBack1Week}>
+                                    <span class="icon">
+                                        <i class="fas fa-angle-double-left"></i>
+                                    </span>
+                                </button>
 
-                            <button class="button is-dark" title="Previous Day" on:click={stepBack1Day}>
-                                <span class="icon">
-                                    <i class="fas fa-angle-left"></i>
-                                </span>
-                            </button>
+                                <button class="button is-dark" title="Previous Day" on:click={stepBack1Day}>
+                                    <span class="icon">
+                                        <i class="fas fa-angle-left"></i>
+                                    </span>
+                                </button>
 
-                            <button class="button is-dark" title="Next Day" on:click={stepForward1Day}  disabled={($state.selectedDate.isSame(moment(), "day") ? "disabled" : null)}>
-                                <span class="icon">
-                                    <i class="fas fa-angle-right"></i>
-                                </span>
-                            </button>
+                                <button class="button is-dark" title="Next Day" on:click={stepForward1Day}  disabled={($state.selectedDate.isSame(moment(), "day") ? "disabled" : null)}>
+                                    <span class="icon">
+                                        <i class="fas fa-angle-right"></i>
+                                    </span>
+                                </button>
 
-                            <button class="button is-dark disabled" title="Next Week" on:click={stepForward1Week} disabled={($state.selectedDate.isSame(moment(), "day") ? "disabled" : null)}>
-                                <span class="icon">
-                                    <i class="fas fa-angle-double-right"></i>
-                                </span>
-                            </button>
+                                <button class="button is-dark disabled" title="Next Week" on:click={stepForward1Week} disabled={($state.selectedDate.isSame(moment(), "day") ? "disabled" : null)}>
+                                    <span class="icon">
+                                        <i class="fas fa-angle-double-right"></i>
+                                    </span>
+                                </button>
+                            </div>
+                        </div>
+
+                        <div class="navbar-item">
+                            <span class="has-text-weight-bold is-size-5">{$state.selectedDate.format("dddd, Do MMMM, YYYY")}</span>
                         </div>
                     </div>
                 </div>
